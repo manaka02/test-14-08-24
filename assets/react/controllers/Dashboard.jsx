@@ -25,10 +25,11 @@ const dashboard =  () => {
         fetchData().then();
     }, []);
 
+
     return (
         <div>
             <CardList userCount={usersData.total} todoCount={todosData.total} commentCount={commentsData.total} />
-            <UserList users={usersData.data} />
+            <UserList users={usersData.data} setUsers={setUsersData} />
             <Row>
                 <Col lg={6} sm={12}>
                     <TodoList todos={todosData.data} />
