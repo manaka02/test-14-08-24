@@ -14,23 +14,58 @@ class ApiServices
     {}
 
     // getUsers
-    public function getUsers(): array
+    public function getUsers(int $page = 1): array
     {
-        $response = $this->client->request('GET', $this->urlSource . '/users');
-        return $response->toArray();
+        $params = [
+            "_per_page" => 10,
+            "_sort" => 'id',
+            "_order" => 'desc',
+            "_page" => $page,
+        ];
+        $response = $this->client->request('GET', $this->urlSource . '/users', [
+            'query' => $params
+        ]);
+
+
+        return [
+            "total" => count($response->toArray()),
+            "data" => $response->toArray()
+        ];
     }
 
     // getTodos
-    public function getTodos(): array
+    public function getTodos(int $page = 1): array
     {
-        $response = $this->client->request('GET', $this->urlSource . '/todos');
-        return $response->toArray();
+        $params = [
+            "_limit" => 5,
+            "_sort" => 'id',
+            "_order" => 'desc',
+        ];
+        $response = $this->client->request('GET', $this->urlSource . '/todos',[
+            'query' => $params
+        ]);
+        return [
+            "total" => count($response->toArray()),
+            "data" => $response->toArray()
+        ];
+
     }
 
     // getComments
     public function getComments(): array
     {
-        $response = $this->client->request('GET', $this->urlSource . '/comments');
-        return $response->toArray();
+        $params = [
+            "_limit" => 5,
+            "_sort" => 'id',
+            "_order" => 'desc',
+        ];
+        $response = $this->client->request('GET', $this->urlSource . '/comments',[
+            'query' => $params
+        ]);
+
+        return [
+            "total" => count($response->toArray()),
+            "data" => $response->toArray()
+        ];
     }
 }

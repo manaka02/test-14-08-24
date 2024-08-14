@@ -1,21 +1,19 @@
 import React from 'react';
+import { ListGroup } from 'react-bootstrap';
 
-const CommentList = (props) => {
-
+const CommentList = ({ comments }) => {
     return (
         <div>
-            <h3>Comment List</h3>
-            <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title">Comment Title</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">Comment Subtitle</h6>
-                    <p className="card-text">Some quick example text to build on the comment title and make up the bulk of the comment's content.</p>
-                    <a href="#" className="card-link">Comment Link</a>
-                    <a href="#" className="card-link">Another Link</a>
-                </div>
-            </div>
+            <h3>Liste de Commentaires</h3>
+            <ListGroup>
+                {comments.map(comment => (
+                    <ListGroup.Item key={comment.id}>
+                        {comment.body}
+                    </ListGroup.Item>
+                ))}
+            </ListGroup>
         </div>
     );
-}
+};
 
 export default CommentList;

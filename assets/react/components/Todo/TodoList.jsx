@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ListGroup, Button, Form } from 'react-bootstrap';
 
-const TodoList = (props) => {
+const TodoList = ({ todos }) => {
+    const [newTodo, setNewTodo] = useState('');
 
-        return (
-            <div>
-                <h3>Todo List</h3>
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Todo Title</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">Todo Subtitle</h6>
-                        <p className="card-text">Some quick example text to build on the todo title and make up the bulk of the todo's content.</p>
-                        <a href="#" className="card-link">Todo Link</a>
-                        <a href="#" className="card-link">Another Link</a>
-                    </div>
-                </div>
-            </div>
-        );
-}
+    const handleAddTodo = () => {
+        // Ajouter une nouvelle tâche (logique de création à implémenter)
+        console.log(newTodo);
+        setNewTodo('');
+    };
+
+    return (
+        <div>
+            <h3>Liste des tâches</h3>
+            <Form>
+                <Form.Group controlId="formBasicTodo">
+                    <Form.Label>Nouvelle tâche</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Entrez une nouvelle tâche"
+                        value={newTodo}
+                        onChange={(e) => setNewTodo(e.target.value)}
+                    />
+                </Form.Group>
+                <Button variant="primary" onClick={handleAddTodo}>
+                    Ajouter
+                </Button>
+            </Form>
+            <ListGroup>
+                {todos.map(todo => (
+                    <ListGroup.Item key={todo.id}>{todo.title}</ListGroup.Item>
+                ))}
+            </ListGroup>
+        </div>
+    );
+};
 
 export default TodoList;
