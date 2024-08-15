@@ -12,7 +12,7 @@ const CommentList = ({ comments }) => {
                         <div className="d-flex align-items-start">
                             <FaUserCircle className="comment-avatar" />
                             <div className="ms-3">
-                                <p className="comment-content">{comment.content}</p>
+                                <small className="comment-content">{comment.content}</small>
                             </div>
                         </div>
                     </ListGroup.Item>

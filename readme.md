@@ -1,33 +1,70 @@
-# projet de test Symfony - React Dashboard
+# Projet de Test Symfony - React Dashboard
 
-Données extraites de l'API https://jsonplaceholder.typicode.com/
+Ce projet est un tableau de bord construit avec Symfony 7 pour le backend et React pour le frontend, avec des données extraites de l'API [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
-// comme les intéractions avec l'API ne sont pas pris en compte (ajout, modification, suppression), j'ai
-décidé d'extraire les données et de les stocker dans une base de données mysql. Toutes les intéractions se font avec la base de données.
+Étant donné que les interactions directes avec l'API (ajout, modification, suppression) ne sont pas prises en charge, j'ai extrait les données et les ai stockées dans une base de données MySQL. Toutes les opérations (CRUD) se font donc via cette base de données.
 
-php 8.3
-npm
-Composer 2
-mysql 8
+## Prérequis
 
-git clone
+Assurez-vous que les technologies suivantes sont installées sur votre machine :
 
-composer install
-npm install
-npm run build
+- **PHP** : Version 8.3
+- **Node.js & npm** : Dernières versions
+- **Composer** : Version 2
+- **MySQL** : Version 8
 
-composer dump-env dev
+## Étapes d'installation
 
+1. **Cloner le dépôt :**
 
-[//]: # (complete mysql database configuration in .env.local.php)
+   ```bash
+   git clone https://github.com/manaka02/test-14-08-24.git
+   cd test-14-08-24
+    ```
+   
+2. **Installer les dépendances PHP :**
 
-// database create
-php bin/console doctrine:database:create
-// force update entity
-php bin/console doctrine:schema:update --force
+   ```bash
+   composer install
+   ```
+   
+3. **Installer les dépendances JavaScript et compilez :**
 
+   ```bash
+    npm install
+    npm run build
+   ```
+   
+4. **Configurer la base de données :**
 
-// extract données  : 
-php bin/console app:extract-data
+   Créez une base de données MySQL et configurez-la dans le fichier `.env.local.php` :
 
-symfony server:start 
+   ```bash
+   composer dump-env dev
+   ```
+   
+   Modifiez les paramètres de connexion à la base de données dans le fichier `.env.local.php` :
+
+   ```bash
+   DATABASE_URL=mysql://<user>:<password>@<host>:<port>/<database>
+   ```
+
+5. **Créer la base de données et les tables :**
+
+   ```bash
+    php bin/console doctrine:database:create
+    php bin/console doctrine:schema:update --force
+
+    ```
+   
+6. **Charger les données initiales :**
+
+   ```bash
+   php bin/console app:extract-data
+   ```
+   
+7. **Lancer le serveur de développement :**
+
+   ```bash
+    symfony serve:start
+    ```
