@@ -45,10 +45,10 @@ const UserFormModal = ({ show, onClose, onSave, title, user }) => {
                         />
                     </Form.Group>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={onClose}>
+                        <Button variant="light" onClick={onClose}>
                             Fermer
                         </Button>
-                        <Button variant="primary" type="submit">
+                        <Button variant="secondary" type="submit">
                             {title.includes('Ajouter') ? 'Ajouter' : 'Modifier'}
                         </Button>
                     </Modal.Footer>

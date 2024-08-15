@@ -1,14 +1,20 @@
 import React from 'react';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Badge, Button } from 'react-bootstrap';
+import { FaUserCircle, FaReply, FaExclamationCircle } from 'react-icons/fa';
 
 const CommentList = ({ comments }) => {
     return (
-        <div>
-            <h3>Liste de Commentaires</h3>
+        <div className="comment-list-container">
+            <h3 className="mb-4">Liste de Commentaires</h3>
             <ListGroup>
                 {comments.map(comment => (
-                    <ListGroup.Item key={comment.id}>
-                        {comment.content}
+                    <ListGroup.Item key={comment.id} className="comment-item">
+                        <div className="d-flex align-items-start">
+                            <FaUserCircle className="comment-avatar" />
+                            <div className="ms-3">
+                                <p className="comment-content">{comment.content}</p>
+                            </div>
+                        </div>
                     </ListGroup.Item>
                 ))}
             </ListGroup>

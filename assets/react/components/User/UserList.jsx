@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Table, Button,Alert } from 'react-bootstrap';
 import UserFormModal from './UserFormModal';
 import {addUser, deleteUser, fetchUsers, updateUser} from "../../services/api";
+import {FaEdit, FaTrash} from "react-icons/fa";
 
 const UserList = ({ users, setUsers }) => {
     const [showAddModal, setShowAddModal] = useState(false);
@@ -56,56 +57,66 @@ const UserList = ({ users, setUsers }) => {
     };
 
     return (
-        <div>
-            <h3>Liste des Utilisateurs</h3>
-            <Button variant="primary" onClick={handleShowAddModal}>
-                Ajouter utilisateur
-            </Button>
-            {alert && <Alert variant={alert.type}>{alert.message}</Alert>}
-            <Table bordered hover size="sm">
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {users.map(user => (
-                    <tr key={user.id}>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>
-                            <Button
-                                variant="primary"
-                                className="mr-2"
-                                onClick={() => handleShowEditModal(user)}
-                            >
-                                Modifier</Button>
-                            <Button
-                                variant="danger"
-                                onClick={() => handleDeleteUser(user.id)}
-                            >Supprimer</Button>
-                        </td>
+        <div className="card bg-light border-0 mb-4">
+            <div className="card-body">
+                <h3 className="mb-4">Liste des Utilisateurs</h3>
+                <Button
+                    variant="secondary"
+                    className="mb-4"
+                    onClick={handleShowAddModal}
+                >
+                    Ajouter utilisateur
+                </Button>
+                {alert && <Alert variant={alert.type} className="mb-4">{alert.message}</Alert>}
+                <Table size="sm" className="table-light">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Actions</th>
                     </tr>
-                ))}
-                </tbody>
-            </Table>
-            <UserFormModal
-                show={showAddModal}
-                onClose={handleCloseAddModal}
-                onSave={handleAddUser}
-                title="Ajouter un utilisateur"
-            />
-            {selectedUser && (
+                    </thead>
+                    <tbody>
+                    {users.map(user => (
+                        <tr key={user.id}>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>
+                                <Button
+                                    variant="secondary"
+                                    // className="text-primary"
+                                    onClick={() => handleShowEditModal(user)}
+                                >
+                                    <FaEdit />
+                                </Button>
+                                <Button
+                                    variant="danger"
+                                    className="ms-2"
+                                    onClick={() => handleDeleteUser(user.id)}
+                                >
+                                    <FaTrash />
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
                 <UserFormModal
-                    show={showEditModal}
-                    onClose={handleCloseEditModal}
-                    onSave={handleUpdateUser}
-                    title="Modifier l'utilisateur"
-                    user={selectedUser}
+                    show={showAddModal}
+                    onClose={handleCloseAddModal}
+                    onSave={handleAddUser}
+                    title="Ajouter un utilisateur"
                 />
-            )}
+                {selectedUser && (
+                    <UserFormModal
+                        show={showEditModal}
+                        onClose={handleCloseEditModal}
+                        onSave={handleUpdateUser}
+                        title="Modifier l'utilisateur"
+                        user={selectedUser}
+                    />
+                )}
+            </div>
         </div>
     );
 };

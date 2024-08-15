@@ -3,26 +3,116 @@
 // import bootstrap icon
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+// app.scss
+@import 'variables';
+
+// Styles pour la Navbar
+.navbar {
+  background-color: $navbar-bg;
+  border-bottom: 1px solid $navbar-border;
+  .form-control {
+    border-radius: $search-border-radius;
+  }
+  .btn-primary {
+    background-color: $btn-primary-bg;
+    border: none;
+    border-radius: $search-border-radius;
+  }
+  .btn-primary:hover {
+    background-color: $btn-primary-hover-bg;
+  }
+  .nav-link {
+    color: $navbar-link-color;
+    margin-left: 15px;
+    &:hover {
+      color: $navbar-link-hover-color;
+    }
+  }
+}
+
+// Styles pour la Sidebar
+#sidebar {
+  background-color: $sidebar-bg;
+  height: 100vh;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .sidebar-header {
+    background-color: $sidebar-header-bg;
+    border-bottom: 1px solid $sidebar-header-border;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-link {
+    color: $sidebar-link-color;
+    padding: 0.75rem 1rem;
+    &:hover {
+      background-color: $sidebar-link-hover-bg;
+      color: $navbar-link-hover-color;
+    }
+  }
+  .nav-link.active {
+    background-color: $sidebar-link-hover-bg;
+    color: $navbar-link-hover-color;
+  }
+}
+
+// Styles pour le collapse
 #sidebar.collapsed {
   width: 80px;
+  .nav-link {
+    text-align: center;
+    padding: 0.75rem 0;
+  }
+  .menu-text {
+    display: none;
+  }
 }
 
-#sidebar.collapsed .nav-link {
-  text-align: center;
-  padding: 0.75rem 0;
+.user-list-container {
+
+  .btn-link {
+    padding: 0;
+    font-size: 1rem;
+  }
+
+  .text-primary {
+    color: $navbar-link-color !important;
+  }
+
+  .text-danger {
+    color: $sidebar-link-hover-bg !important;
+  }
 }
 
-#sidebar.collapsed .menu-text {
-  display: none;
+.comment-list-container {
+  .comment-item {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-avatar {
+    font-size: 2rem;
+    color: #6c757d;
+  }
+
+  .comment-content {
+    font-size: 1rem;
+    color: #495057;
+    margin: 0;
+  }
+
+  .comment-actions {
+    margin-top: 0.5rem;
+  }
 }
 
-.sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
 
-.sidebar-header h3 {
-  margin: 0;
-}
+
+

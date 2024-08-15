@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
@@ -14,17 +15,19 @@
     {% endblock %}
 </head>
     <body>
-        <div class="container-fluid">
+        <div class="container-fluid px-0">
             <div class="row">
                 {% include 'partials/sidebar.html.twig' %}
                 <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                     {% include 'partials/navbar.html.twig' %}
-                    <main>
-                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h1 class="h2">{% block header %}Dashboard{% endblock %}</h1>
-                        </div>
-                        {% block body %}{% endblock %}
-                    </main>
+                    <div class="container">
+                        <main>
+                            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                                <h1 class="h2">{% block header %}Dashboard{% endblock %}</h1>
+                            </div>
+                            {% block body %}{% endblock %}
+                        </main>
+                    </div>
                 </div>
             </div>
         </div>

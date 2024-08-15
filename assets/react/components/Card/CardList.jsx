@@ -1,32 +1,34 @@
+// src/components/CardList.jsx
 import React from 'react';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
+import CardComponent from './CardComponent';
 
 const CardList = ({ userCount, todoCount, postCount }) => {
     return (
-        <Row>
+        <Row className="g-4">
             <Col md={4}>
-                <Card className="mb-4">
-                    <Card.Body>
-                        <Card.Title>Utilisateurs Actifs</Card.Title>
-                        <Card.Text>{userCount}</Card.Text>
-                    </Card.Body>
-                </Card>
+                <CardComponent
+                    title="Users"
+                    subtitle="Total Users"
+                    count={userCount}
+                    iconType="users"
+                />
             </Col>
             <Col md={4}>
-                <Card className="mb-4">
-                    <Card.Body>
-                        <Card.Title>Total Todos</Card.Title>
-                        <Card.Text>{todoCount}</Card.Text>
-                    </Card.Body>
-                </Card>
+                <CardComponent
+                    title="Todos"
+                    subtitle="Total Todos"
+                    count={todoCount}
+                    iconType="tasks"
+                />
             </Col>
             <Col md={4}>
-                <Card className="mb-4">
-                    <Card.Body>
-                        <Card.Title>Total Posts</Card.Title>
-                        <Card.Text>{postCount}</Card.Text>
-                    </Card.Body>
-                </Card>
+                <CardComponent
+                    title="Posts"
+                    subtitle="Total Posts"
+                    count={postCount}
+                    iconType="posts"
+                />
             </Col>
         </Row>
     );

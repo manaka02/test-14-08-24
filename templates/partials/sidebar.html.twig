@@ -1,30 +1,32 @@
-<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar vh-100">
+<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar vh-100  p-0">
     <div class="position-sticky">
-        <div class="sidebar-header d-flex justify-content-between align-items-center">
-            <h3>LOGO</h3>
-            <button id="sidebarToggle" class="btn btn-outline-secondary">
+        <div class="sidebar-header">
+            <div class="d-flex align-items-center">
+                <img src="{{ asset('statics/react-2.svg') }}" alt="logo" width="30">
+            </div>
+            <button id="sidebarToggle" class="btn btn-outline-light">
                 <i class="bi bi-chevron-left"></i>
             </button>
         </div>
-        <ul class="nav flex-column">
+        <ul class="nav flex-column mt-2">
             <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">
-                    <i class="bi bi-house"></i> <span class="menu-text">Dashboard</span>
+                    <i class="bi bi-house"></i> <span class="menu-text ms-2">Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="bi bi-people"></i> <span class="menu-text">Users</span>
+                    <i class="bi bi-people"></i> <span class="menu-text ms-2">Users</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="bi bi-image"></i> <span class="menu-text">Photos</span>
+                    <i class="bi bi-image"></i> <span class="menu-text ms-2">Photos</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <i class="bi bi-gear"></i> <span class="menu-text">Configuration</span>
+                    <i class="bi bi-gear"></i> <span class="menu-text ms-2">Configuration</span>
                 </a>
             </li>
         </ul>
