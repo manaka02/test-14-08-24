@@ -1,9 +1,6 @@
-const API_URL = '/admin/json';
+const API_URL = '/admin/api';
 
-export const fetchUsers = async () => {
-    const response = await fetch(`${API_URL}/utilisateur`);
-    return response.json();
-};
+
 
 export const fetchTodos = async () => {
     const response = await fetch(`${API_URL}/todo`);
@@ -15,8 +12,13 @@ export const fetchComments = async () => {
     return response.json();
 };
 
+export const fetchUsers = async () => {
+    const response = await fetch(`${API_URL}/utilisateur`);
+    return response.json();
+};
+
 export const addUser = async (user) => {
-    const response = await fetch(`${API_URL}/user/add`, {
+    const response = await fetch(`${API_URL}/utilisateur/add`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -27,7 +29,7 @@ export const addUser = async (user) => {
 };
 
 export const updateUser = async (userId, user) => {
-    const response = await fetch(`${API_URL}/user/${userId}`, {
+    const response = await fetch(`${API_URL}/utilisateur/delete/${userId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +40,7 @@ export const updateUser = async (userId, user) => {
 };
 
 export const deleteUser = async (userId) => {
-    const response = await fetch(`${API_URL}/user/${userId}`, {
+    const response = await fetch(`${API_URL}/utilisateur/delete/${userId}`, {
         method: 'DELETE',
     });
     return response.json();

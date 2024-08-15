@@ -62,7 +62,7 @@ const UserList = ({ users, setUsers }) => {
                 Ajouter utilisateur
             </Button>
             {alert && <Alert variant={alert.type}>{alert.message}</Alert>}
-            <Table striped bordered hover>
+            <Table bordered hover size="sm">
                 <thead>
                 <tr>
                     <th>Nom</th>

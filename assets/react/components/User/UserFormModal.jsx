@@ -12,7 +12,8 @@ const UserFormModal = ({ show, onClose, onSave, title, user }) => {
         }
     }, [user]);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Empêche la soumission par défaut si le formulaire n'est pas valide
         onSave(formData);
     };
 
@@ -22,7 +23,7 @@ const UserFormModal = ({ show, onClose, onSave, title, user }) => {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formUserName">
                         <Form.Label>Nom</Form.Label>
                         <Form.Control
@@ -30,6 +31,7 @@ const UserFormModal = ({ show, onClose, onSave, title, user }) => {
                             placeholder="Entrez le nom"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="formUserEmail">
@@ -39,18 +41,19 @@ const UserFormModal = ({ show, onClose, onSave, title, user }) => {
                             placeholder="Entrez l'email"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            required
                         />
                     </Form.Group>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={onClose}>
+                            Fermer
+                        </Button>
+                        <Button variant="primary" type="submit">
+                            {title.includes('Ajouter') ? 'Ajouter' : 'Modifier'}
+                        </Button>
+                    </Modal.Footer>
                 </Form>
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>
-                    Fermer
-                </Button>
-                <Button variant="primary" onClick={handleSubmit}>
-                    {title.includes('Ajouter') ? 'Ajouter' : 'Modifier'}
-                </Button>
-            </Modal.Footer>
         </Modal>
     );
 };

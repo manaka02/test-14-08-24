@@ -7,8 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/json/todo')]
-class JsonController  extends AbstractController
+#[Route('/admin/api/todo')]
+class ApiController  extends AbstractController
 {
     public function __construct(private readonly ApiServices $apiServices)
     {}
