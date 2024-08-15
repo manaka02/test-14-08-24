@@ -2,25 +2,38 @@
 
 namespace App\Controller\Admin\Utilisateur;
 
+use App\Repository\UtilisateurRepository;
 use App\Service\ApiServices;
+use App\Service\UtilisateurServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/admin/api/utilisateur')]
-class ApiController  extends AbstractController
+class ApiController extends AbstractController
 {
-    public function __construct(private readonly ApiServices $apiServices)
-    {}
+    public function __construct(
+        private readonly UtilisateurServices $utilisateurServices,
+        private readonly SerializerInterface $serializer)
+    {
+    }
 
     // get Users
     #[Route('/', name: 'app_admin_utilisateur_json', methods: ['GET'])]
-    public function users(): JsonResponse
+    public function users(UtilisateurRepository $repository): JsonResponse
     {
-        $users = $this->apiServices->getUsers();
-        return $this->json($users);
+        $list = $repository->findBy([], ['id' => 'DESC'], 5);
+
+        $responseData = [
+            'total' => $repository->count([]),
+            'data' => $list
+        ];
+        $responseJson = $this->serializer->serialize($responseData, 'json', ['groups' => 'user:read']);
+
+        return new JsonResponse($responseJson, 200, [], true);
     }
 
     // add user
@@ -34,7 +47,7 @@ class ApiController  extends AbstractController
         try {
             $user = $this->apiServices->addUser($data);
             return $this->json($user);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
@@ -48,7 +61,7 @@ class ApiController  extends AbstractController
         try {
             $user = $this->apiServices->updateUser($data);
             return $this->json($user);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
@@ -57,13 +70,13 @@ class ApiController  extends AbstractController
     #[Route('/delete/{id}', name: 'app_admin_utilisateur_delete_json', methods: ['DELETE'])]
     public function deleteUser(Request $request, int $id = null): JsonResponse
     {
-        if ($id === null){
+        if ($id === null) {
             return $this->json("id is required", Response::HTTP_BAD_REQUEST);
         }
         try {
             $user = $this->apiServices->deleteUser($id);
             return $this->json($user);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }

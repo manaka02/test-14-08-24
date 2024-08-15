@@ -8,7 +8,7 @@ const CommentList = ({ comments }) => {
             <ListGroup>
                 {comments.map(comment => (
                     <ListGroup.Item key={comment.id}>
-                        {comment.body}
+                        {comment.content}
                     </ListGroup.Item>
                 ))}
             </ListGroup>

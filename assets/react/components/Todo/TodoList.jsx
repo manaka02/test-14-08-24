@@ -29,7 +29,7 @@ const TodoList = ({ todos }) => {
             </Form>
             <ListGroup>
                 {todos.map(todo => (
-                    <ListGroup.Item key={todo.id}>{todo.title}</ListGroup.Item>
+                    <ListGroup.Item key={todo.id}>{todo.content}</ListGroup.Item>
                 ))}
             </ListGroup>
         </div>
