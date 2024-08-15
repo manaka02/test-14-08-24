@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 
-const CardList = ({ userCount, todoCount, commentCount }) => {
+const CardList = ({ userCount, todoCount, postCount }) => {
     return (
         <Row>
             <Col md={4}>
@@ -23,8 +23,8 @@ const CardList = ({ userCount, todoCount, commentCount }) => {
             <Col md={4}>
                 <Card className="mb-4">
                     <Card.Body>
-                        <Card.Title>Total Commentaires</Card.Title>
-                        <Card.Text>{commentCount}</Card.Text>
+                        <Card.Title>Total Posts</Card.Title>
+                        <Card.Text>{postCount}</Card.Text>
                     </Card.Body>
                 </Card>
             </Col>

@@ -80,35 +80,6 @@ class ApiServices
         }
     }
 
-    public function addUser(?array $data)
-    {
-        if (!isset($data['name']) || !isset($data['email'])) {
-            throw new \Exception("name and email are required");
-        }
-
-        $data = [
-            'name' => $data['name'],
-            'email' => $data['email'],
-        ];
-
-        $headers = [
-            'Content-Type' => 'application/json',
-            'charset' => 'utf-8',
-        ];
-
-        try {
-            $response = $this->client->request('POST', $this->urlSource . '/users', [
-                'headers' => $headers,
-                'json' => $data
-            ]);
-
-            return $response->toArray();
-        }catch (\Throwable $e){
-            throw new \Exception( "Une erreur est survenue lors de l'ajout de l'utilisateur");
-        }
-
-    }
-
     public function updateUser(?array $data)
     {
     }

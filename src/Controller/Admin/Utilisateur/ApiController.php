@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Utilisateur;
 
+use App\Entity\Utilisateur;
 use App\Repository\UtilisateurRepository;
 use App\Service\ApiServices;
 use App\Service\UtilisateurServices;
@@ -40,13 +41,14 @@ class ApiController extends AbstractController
     #[Route('/add', name: 'app_admin_utilisateur_add_json', methods: ['POST'])]
     public function addUser(Request $request): JsonResponse
     {
-        // get json data
 
         $data = json_decode($request->getContent(), true);
-
         try {
-            $user = $this->apiServices->addUser($data);
-            return $this->json($user);
+            $user = $this->utilisateurServices->createUser($data);
+            return $this->json([
+                'message' => 'User created',
+                'userId' => $user->getId()
+            ], Response::HTTP_CREATED);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
@@ -54,13 +56,16 @@ class ApiController extends AbstractController
 
     // update user
     #[Route('/update/{id}', name: 'app_admin_utilisateur_update_json', methods: ['PUT'])]
-    public function updateUser(Request $request): JsonResponse
+    public function updateUser(Request $request, Utilisateur $utilisateur): JsonResponse
     {
         // get json data
         $data = json_decode($request->getContent(), true);
         try {
-            $user = $this->apiServices->updateUser($data);
-            return $this->json($user);
+            $user = $this->utilisateurServices->updateUser($utilisateur, $data);
+            return new JsonResponse([
+                'message' => 'User updated',
+                'userId' => $user->getId()
+            ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
@@ -68,14 +73,14 @@ class ApiController extends AbstractController
 
     // delete user
     #[Route('/delete/{id}', name: 'app_admin_utilisateur_delete_json', methods: ['DELETE'])]
-    public function deleteUser(Request $request, int $id = null): JsonResponse
+    public function deleteUser(Request $request, Utilisateur $utilisateur): JsonResponse
     {
-        if ($id === null) {
-            return $this->json("id is required", Response::HTTP_BAD_REQUEST);
-        }
+
         try {
-            $user = $this->apiServices->deleteUser($id);
-            return $this->json($user);
+            $this->utilisateurServices->deleteUser($utilisateur);
+            return new JsonResponse([
+                'message' => 'User deleted'
+            ], Response::HTTP_OK);
         } catch (\Exception $e) {
             return $this->json($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }

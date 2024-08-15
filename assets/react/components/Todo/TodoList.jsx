@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { ListGroup, Button, Form } from 'react-bootstrap';
+import {addTodo, fetchTodos} from '../../services/api';
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos,  setTodosData }) => {
     const [newTodo, setNewTodo] = useState('');
 
-    const handleAddTodo = () => {
-        // Ajouter une nouvelle tâche (logique de création à implémenter)
-        console.log(newTodo);
-        setNewTodo('');
+    const handleAddTodo = async () => {
+        if (newTodo.trim() === '') return;
+
+        await addTodo({ content: newTodo, completed: false })
+
+        const updatedTodos = await fetchTodos();
+        setTodosData(updatedTodos);
     };
 
     return (
